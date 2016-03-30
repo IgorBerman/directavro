@@ -1,7 +1,7 @@
 # Description
 Direct file output committer for Avro key value format.
 
-Currently testing in production for non-critical jobs.
+Tested in production. So far so good.
 
 Solves performance problem when working with newHadoopApi and s3. 
 
