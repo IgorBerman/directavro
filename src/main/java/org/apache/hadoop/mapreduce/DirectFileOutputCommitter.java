@@ -140,6 +140,15 @@ public class DirectFileOutputCommitter extends OutputCommitter {
   throws IOException {
     // delete the _temporary folder
     cleanupJob(context);
+        //also delete success marker when job is aborted
+    Path finalOutput = getOutputPath();
+    FileSystem fs = finalOutput.getFileSystem(context.getConfiguration());
+
+    if (context.getConfiguration().getBoolean(SUCCESSFUL_JOB_OUTPUT_DIR_MARKER, true)) {
+    	LOG.info("Deleting succes file " + context.getJobID());
+    	Path markerPath = new Path(outputPath, SUCCEEDED_FILE_NAME);
+    	fs.delete(markerPath, false);
+    }
   }
   
   /**
